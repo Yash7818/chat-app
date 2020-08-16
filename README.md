@@ -1,5 +1,5 @@
-# chat-app
-chat application 
-**local run**
-For running the file locally run the command 
+# chat-app <br>
+chat application <br>
+**local run**<br>
+For running the file locally run the command <br>
 **npm start**
