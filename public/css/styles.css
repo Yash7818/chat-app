@@ -121,6 +121,10 @@ button:disabled {
 
 .message {
   margin-bottom: 16px;
+  border: 2px solid #f0f0f0;
+  width: fit-content;
+  padding: .6em;
+  border-radius: 10px;
 }
 
 .message__name {

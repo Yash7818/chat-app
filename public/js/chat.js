@@ -5,6 +5,7 @@ const $messageForminput = document.querySelector("input");
 const $messageFormbutton = document.querySelector("button");
 const $sendLocation = document.querySelector("#send-location");
 const $messages = document.querySelector("#messages");
+const $my_msg = document.querySelector("#my_msg");
 // socket.on('countUpdated',(count)=>{
 //     console.log("count updated")
 //     console.log(count)
@@ -15,6 +16,7 @@ const $messages = document.querySelector("#messages");
 //     })
 
 // Templates
+// console.log($my_name.value);
 const messageTemplate = document.querySelector("#message-temp").innerHTML;
 const locationTemplate = document.querySelector("#location-temp").innerHTML;
 const sidebarTemplate = document.querySelector('#sidebar-temp').innerHTML;
@@ -34,6 +36,8 @@ const autoscroll = () =>{
     // height of the new msg
     const newMessageStyles = getComputedStyle($newMessage)
     const newMessagemargin = parseInt(newMessageStyles.marginBottom)
+    const newMessageleftmargin = parseInt(newMessageStyles.marginLeft)
+
     const newMessageHeight = $newMessage.offsetHeight + newMessagemargin
 
     // visible height
@@ -47,10 +51,11 @@ const autoscroll = () =>{
 
     const scrollOffset = $messages.scrollTop + visibleHeight
 
-
+  
     if((containerHeight - newMessageHeight) <= scrollOffset){
         $messages.scrollTop = $messages.scrollHeight
     }
+    // newMessageStyles.marginLeft = '200px';
 }
 
 socket.on("message", (message) => {
@@ -62,6 +67,7 @@ socket.on("message", (message) => {
     createdAt: moment(message.createdAt).format("h:mm a"),
   });
   $messages.insertAdjacentHTML("beforeend", html);
+ 
   autoscroll()
 });
 socket.on("locationMessage", (url) => {
@@ -73,6 +79,7 @@ socket.on("locationMessage", (url) => {
     createdAt: moment(url.createdAt).format("h:mm a"),
   });
   $messages.insertAdjacentHTML("beforeend", lochtml);
+ 
   autoscroll()
 });
 
@@ -97,6 +104,9 @@ $messageForm.addEventListener("submit", (e) => {
     $messageFormbutton.removeAttribute("disabled");
     $messageForminput.value = "";
     $messageForminput.focus();
+    const $newMessage = $messages.lastElementChild
+  
+    $newMessage.style.marginLeft = '920px'
     if (error) {
       return console.log(error);
     }
@@ -119,6 +129,8 @@ $sendLocation.addEventListener("click", () => {
         longitude: position.coords.longitude,
       },
       () => {
+        const $newMessage = $messages.lastElementChild
+        $newMessage.style.marginLeft = '920px'
         $sendLocation.removeAttribute("disabled");
         console.log("Location Shared!");
       }
