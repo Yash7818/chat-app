@@ -120,12 +120,20 @@ button:disabled {
 /* Message Styles */
 
 .message {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   border: 2px solid #f0f0f0;
   width: fit-content;
+  /* max-width: 50%; */
+  height: auto;
+  /* height: fit-content; */
+
   padding: .6em;
   border-radius: 10px;
 }
+/* .message_text_my{
+  width: 80%;
+  height: auto;
+} */
 
 .message__name {
   font-weight: 600;

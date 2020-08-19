@@ -27,6 +27,24 @@ const { username, room } = Qs.parse(location.search, {
 
 // console.log(username, room)
 
+// console.log(username)
+const myfunct = (x,y,z) =>{
+  const $newMessage = $messages.lastElementChild
+  if(x.matches){
+    $newMessage.marginLeft = '82%'
+  }
+  else if(y.matches){
+    $newMessage.marginLeft = '72%'
+  }
+  else if(z.matches){
+    $newMessage.marginLeft = '52%'
+  }
+}
+var x = window.matchMedia("(max-width:1440px)")
+var y = window.matchMedia("(max-width:1024px)")
+var z = window.matchMedia("(max-width:768px)")
+
+
 //message is an object
 
 const autoscroll = () =>{
@@ -67,7 +85,14 @@ socket.on("message", (message) => {
     createdAt: moment(message.createdAt).format("h:mm a"),
   });
   $messages.insertAdjacentHTML("beforeend", html);
- 
+  if(message.username === username.toLowerCase()){
+    const $newMessage = $messages.lastElementChild
+    $newMessage.style.marginRight = '2%'
+    $newMessage.style.marginLeft = 'auto'
+    console.log($newMessage.style.width)
+  }
+  // console.log(username)
+  // console.log(mess)
   autoscroll()
 });
 socket.on("locationMessage", (url) => {
@@ -104,9 +129,8 @@ $messageForm.addEventListener("submit", (e) => {
     $messageFormbutton.removeAttribute("disabled");
     $messageForminput.value = "";
     $messageForminput.focus();
-    const $newMessage = $messages.lastElementChild
-  
-    $newMessage.style.marginLeft = '920px'
+    // const $newMessage = $messages.lastElementChild
+    // $newMessage.style.marginLeft = '82%'
     if (error) {
       return console.log(error);
     }
@@ -129,8 +153,8 @@ $sendLocation.addEventListener("click", () => {
         longitude: position.coords.longitude,
       },
       () => {
-        const $newMessage = $messages.lastElementChild
-        $newMessage.style.marginLeft = '920px'
+        // const $newMessage = $messages.lastElementChild
+        // $newMessage.style.marginLeft = '82%'
         $sendLocation.removeAttribute("disabled");
         console.log("Location Shared!");
       }
