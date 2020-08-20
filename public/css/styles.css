@@ -123,11 +123,12 @@ button:disabled {
   margin-bottom: 10px;
   border: 2px solid #f0f0f0;
   width: fit-content;
-  max-width: 50%;
+  max-width:40%;
   height: auto;
   /* height: fit-content; */
   text-overflow: ellipsis;
   word-wrap:break-word;
+  white-space: normal;
   padding: .6em;
   border-radius: 10px;
 }
