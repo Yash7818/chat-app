@@ -123,12 +123,16 @@ button:disabled {
   margin-bottom: 10px;
   border: 2px solid #f0f0f0;
   width: fit-content;
-  /* max-width: 50%; */
+  max-width: 50%;
   height: auto;
   /* height: fit-content; */
-
+  text-overflow: ellipsis;
+  word-wrap:break-word;
   padding: .6em;
   border-radius: 10px;
+}
+.message-temp .message{
+  max-width: 50%;
 }
 /* .message_text_my{
   width: 80%;
