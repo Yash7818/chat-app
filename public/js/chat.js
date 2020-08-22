@@ -45,6 +45,13 @@ var y = window.matchMedia("(max-width:1024px)")
 var z = window.matchMedia("(max-width:768px)")
 
 
+function linkify(text){
+  var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+  return text.replace(urlRegex,function(url){
+    return '<a href="' + url + '">' + url + ' </a>';
+  });
+}
+
 //message is an object
 
 const autoscroll = () =>{
@@ -78,10 +85,11 @@ const autoscroll = () =>{
 
 socket.on("message", (message) => {
   console.log(message);
-  
+  var msgout = linkify(message.text)
+  console.log(msgout)
   const html = Mustache.render(messageTemplate, {
     username: message.username,
-    message: message.text,
+    message: msgout,
     createdAt: moment(message.createdAt).format("h:mm a"),
   });
   $messages.insertAdjacentHTML("beforeend", html);
@@ -89,7 +97,7 @@ socket.on("message", (message) => {
     const $newMessage = $messages.lastElementChild
     $newMessage.style.marginRight = '2%'
     $newMessage.style.marginLeft = 'auto'
-    console.log($newMessage.style.width)
+    // console.log($newMessage.style.width)
   }
   // console.log(username)
   // console.log(mess)
@@ -104,7 +112,12 @@ socket.on("locationMessage", (url) => {
     createdAt: moment(url.createdAt).format("h:mm a"),
   });
   $messages.insertAdjacentHTML("beforeend", lochtml);
- 
+  if(url.username === username.toLowerCase()){
+    const $newMessage = $messages.lastElementChild
+    $newMessage.style.marginRight = '2%'
+    $newMessage.style.marginLeft = 'auto'
+    // console.log($newMessage.style.width)
+  }
   autoscroll()
 });
 

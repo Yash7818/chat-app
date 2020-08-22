@@ -25,19 +25,29 @@
         </div>
     </div>
     
-
+    <script>
+        function linkify(text){
+            var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+            return text.replace(urlRegex,function(url){
+              return '<a href="' + url + '">' + url + '</a>';
+            });
+            
+          }
+    </script>
     <script id="message-temp" type="text/html">
+       
         <div class="message" id="my_msg">
             <p>
                 <span class="message__name">{{username}}</span>
                 <span class="message__meta">{{createdAt}}</span>
             </p>
-            <div class="message_text_my">
-               {{message}}
-            </div>
+            <p >
+            {{message}}
+            </p>
         </div>
     </script>
     <script id="location-temp" type="text/html">
+        
         <div class="message">
             <p>
                 <span class="message__name">{{username}}</span>
