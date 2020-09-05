@@ -9,7 +9,7 @@ const server = http.createServer(app)
 const socketio = require('socket.io')
 const io = socketio(server)
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 
 const publicDirectoryPath = path.join(__dirname,'../public')
 
